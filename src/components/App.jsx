@@ -2,27 +2,47 @@ import { useState } from "react"
 import { Card } from "./card"
 
 export function App() {
-const [allPokemon, setAllPokemon] = useState(["ditto","squirtle","eevee"])
+const [allPokemon, setAllPokemon] = useState({
+    ditto:{name:"ditto", url:""},
+    squirtle:{name:"squirtle", url:""},
+    eevee:{name:"eevee", url:""}
+})
 const [clicked, setClicked] = useState([])
 const [tempState, setTempState] = useState("")
 
-async function getApiLink(name="ditto"){
+async function getApiLink(pokemon){
    
     console.log("get api link is running")
-    const url = "https://pokeapi.co/api/v2/pokemon/"+name
-    let result = ""
+    console.log(pokemon)
+    const url = "https://pokeapi.co/api/v2/pokemon/"+pokemon
+    console.log("url is ")
+    console.log(url)
     await fetch(url, {mode: 'cors'})
         .then(function(response){
             return response.json()
         })
         .then(function(response) {
-            // setTempState({...tempState,value:response["sprites"]["other"]["official-artwork"]["front_default"]} )
+            const newUrl = {...allPokemon.pokemon,url:response["sprites"]["other"]["official-artwork"]["front_default"]} 
+            const newPokemon = {...allPokemon, [pokemon]:newUrl}
+            // setAllPokemon(newPokemon)
+            //^^^^^^^ infinite loop
             // setTempState(newState)
-            console.log("temp state is")
-            console.log(tempState)
+            console.log("pokemons are is")
+            console.log(allPokemon)
         })
 }
-
+console.log("Fuck")
+console.log(allPokemon)
+for( const pokemon in allPokemon) {
+    console.log("pokemon is")
+    console.log(pokemon)
+    getApiLink(pokemon)
+    console.log("pokemon list is")
+    console.log(allPokemon)
+}
+// allPokemon.map((pokemon)=>{
+   
+// })
     return (
         <>
         <h1>Pokemon Memory Game</h1>
@@ -30,16 +50,25 @@ async function getApiLink(name="ditto"){
         <h2>Instructions:</h2>
         <p>Get poitns by clicking on an image. But don't click on a pokemon more than once!</p>
         </div>
-        {allPokemon.map((pokemonName)=>{
-            console.log('what im seeing')
-            getApiLink(pokemonName)
-            console.log(tempState)
+        {/* {
+            for( const pokemon in allPokemon) {
+                console.log("help")
+                return (
+                    <Card key={pokemonName.name} apiLink={pokemonName.url}></Card>
+                    )
+            }
+        } */}
 
-            return (
-            <Card key={pokemonName} apiLink={tempState}></Card>
-            )
-        })}
         
         </>
     )
 }
+        // {allPokemon.map((pokemonName)=>{
+        //     // console.log('what im seeing')
+        //     // getApiLink(pokemonName)
+        //     // console.log(tempState)
+
+        //     return (
+        //     <Card key={pokemonName.name} apiLink={pokemonName.url}></Card>
+        //     )
+        // })}

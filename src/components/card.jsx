@@ -1,11 +1,12 @@
 
 export function Card(apiLink){
-    console.log('api link is')
-    console.log(apiLink)
+    console.log("api link is passing to src")
+    console.log(apiLink.apiLink.value)
+    const srcUrl = apiLink.apiLink.value
     return (
         <>
         <div className="card">
-        <img src={apiLink} width="200" height="200" alt="pokemon"></img>
+        <img src={srcUrl} width="200" height="200" alt="pokemon"></img>
         <h2>Pokemon name</h2>
         </div>
         </>

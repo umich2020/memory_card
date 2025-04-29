@@ -28,12 +28,15 @@ async function getApiLink(pokemon){
             setAllPokemon(newPokemon)
         })
 }
-for( const pokemon in allPokemon) {
+useEffect(()=>{
+    for( const pokemon in allPokemon) {
 
-    //  getApiLink(pokemon)
-    // ^stopped cause it causes an infinite loop
+         getApiLink(pokemon)
+        // ^stopped cause it causes an infinite loop
+    }
+    console.log('after api')
+},[])
 
-}
 // getApiLink("ditto")
 console.log("pokemon list is")
 console.log(allPokemon)
@@ -47,7 +50,8 @@ console.log(allPokemon)
         <h2>Instructions:</h2>
         <p>Get points by clicking on an image. But don't click on a pokemon more than once!</p>
         </div>
-        <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card>
+        <Card key={allPokemon.ditto.name} apiLink={allPokemon}></Card>
+        {/* <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card> */}
         {console.log("everything is being ran first and then it's api issues")}
         {/* {
             for( const pokemon in allPokemon) {

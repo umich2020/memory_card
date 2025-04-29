@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Card } from "./card"
 
 export function App() {
+console.log("start")
 const [allPokemon, setAllPokemon] = useState({
     ditto:{name:"ditto", url:""},
     squirtle:{name:"squirtle", url:""},
@@ -10,9 +11,15 @@ const [allPokemon, setAllPokemon] = useState({
 const [clicked, setClicked] = useState([])
 
 async function getApiLink(pokemon){
+    console.log('when does this run')
     const url = "https://pokeapi.co/api/v2/pokemon/"+pokemon
     await fetch(url, {mode: 'cors'})
+    //so allegeldy this return a promise. then i json it right?
+    //and then cuz response just a promise i think
+
         .then(function(response){
+            console.log('response is')
+            console.log(response)
             return response.json()
         })
         .then(function(response) {
@@ -41,6 +48,7 @@ console.log(allPokemon)
         <p>Get points by clicking on an image. But don't click on a pokemon more than once!</p>
         </div>
         <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card>
+        {console.log("everything is being ran first and then it's api issues")}
         {/* {
             for( const pokemon in allPokemon) {
                 console.log("help")

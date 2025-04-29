@@ -2,7 +2,8 @@
 export function Card(apiLink){
     console.log("api link is passing to src")
     console.log(apiLink.apiLink.value)
-    const srcUrl = apiLink.apiLink.value
+    let srcUrl = apiLink.apiLink.value
+    srcUrl = "lol"
     return (
         <>
         <div className="card">

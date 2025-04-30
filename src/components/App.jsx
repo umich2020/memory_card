@@ -55,21 +55,52 @@ async function getApiLink(pokemon){
 
         })
 }
+// useEffect(()=>{
+//     let promises = "test"
+//     console.log(promises)
+//     // eslint-disable-next-line no-unexpected-multiline
+//     (async () => {
+//         for( const pokemon in allPokemon) {
+//             const url = "https://pokeapi.co/api/v2/pokemon/"+pokemon
+//              const pokemonPromise = await fetch(url, {mode: 'cors'})
+//              promises.push(pokemonPromise)
+//     }
+//     })();
+
+// console.log('promises is ')
+// console.log(promises)
+
+// },[])
 useEffect(()=>{
-    let temp = ""
-    for( const pokemon in allPokemon) {
+    let promises = []
+    let obj = null
+    async function apiCalls() {
+        for( const pokemon in allPokemon) {
+                const url = "https://pokeapi.co/api/v2/pokemon/"+pokemon
+                    await fetch(url, {mode: 'cors'})
+                    .then(function(response){
+                        return response.json()
+                    })
+                    .then(function(response) {
+                        const responseUrl = response["sprites"]["other"]["official-artwork"]["front_default"]
+                        promises.push([[pokemon],{"name":pokemon,"url":responseUrl}])
+                        obj = Object.fromEntries(promises)
+                    })
+                    
 
-         getApiLink(pokemon)
-        // ^stopped cause it causes an infinite loop
+        }
+        Promise.all(promises).then((values)=>{
+            console.log("the value of each obj is")
+            console.log(obj)
+            setAllPokemon(obj)
+        })
+        console.log("all pokemon is now")
+        console.log(allPokemon)
     }
-    console.log('after api')
-    return () => {
-        // console.log('setting new pokemon clean up funciton')
-        // await setAllPokemon(temp)
-        // console.log(allPokemon)
-    }
+    apiCalls()
+
+
 },[])
-
 // getApiLink("ditto")
 console.log("pokemon list is")
 console.log(allPokemon)
@@ -83,7 +114,7 @@ console.log(allPokemon)
         <h2>Instructions:</h2>
         <p>Get points by clicking on an image. But don't click on a pokemon more than once!</p>
         </div>
-        <Card key={allPokemon.ditto} apiLink={allPokemon}></Card>
+        <Card key={allPokemon.ditto} apiLink={allPokemon.ditto.url}></Card>
         {/* <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card> */}
         {console.log("everything is being ran first and then it's api issues")}
         {/* {

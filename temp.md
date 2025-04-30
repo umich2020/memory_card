@@ -18,3 +18,17 @@ await fetch(url, {mode: 'cors'})
 -Got a response one day later,
     -Use effect is a soluation to fix this problem
     -also they suggested to use Promises.all so it triggers once to get all the api links
+
+-am I having issues because there's no clean up function? Like a funciton that sets the current 
+all pokemon to itself so it can be referenced, becuase it seems like the next render is based on the first 
+snapshot where everything is empty
+-I think it's a renderering issue. the const X in Y is similar to just multiple functional calls based
+on changing data. That's why i think it's not updating properly, maybe that's why we need a clean up function
+    -^the issue is that there's no await because it would run before the data is fetched.
+    Maybe I actually do need to do a promises.all
+
+-next job
+-Look at updater function for objects that are within objects
+
+--access the for pokemon in AllPokemon means i'm accessing the property not the object in pokemon.
+-But it returns as a string not an object which is strange. i think that's why we might have to do promise all

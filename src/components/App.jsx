@@ -126,18 +126,19 @@ const loadPokemon = () => {
     {console.log("this is start of console")}
     {console.log()}
             {
-                Object.keys(allPokemon).map((pokemon) => {
-                    return (
-                        <>
-                        <Card key={pokemon} apiLink={allPokemon.pokemon.url}>test</Card>
-                        <div>test</div>
-                        </>
-                    )
-                    
+                Object.keys(allPokemon).map(pokemon => {
+                   
+                    return <Card key={[pokemon]} name={pokemon} apiLink={allPokemon[pokemon].url}></Card>
                     
                 })
+                
             }
-        <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card>
+            {/* {
+                for(const pokemon in allPokemon) {
+                    <Card key={[pokemon]} apiLink={allPokemon.[pokemon].url}></Card>
+                }
+            } */}
+        <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url} name="ditto"></Card>
         {/* {allPokemon.map((pokemon) => (
             <h2 key={pokemon}>{pokemon}</h2>
         ))} */}

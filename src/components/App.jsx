@@ -108,15 +108,7 @@ console.log(allPokemon)
    
 // })
 const loadPokemon = () => {
-    let list = []
-    for (const pokemons in allPokemon) {
-        list.push(
-            <Card key={allPokemon.pokemons.name} apiLink={allPokemon.pokemons.url}></Card>
-        )
-    }
-    console.log("what is list")
-    console.log(list)
-    return list
+    
 }
     return (
         <>
@@ -131,11 +123,24 @@ const loadPokemon = () => {
                         </>}
         } */}
 
-    
+    {console.log("this is start of console")}
+    {console.log()}
+            {
+                Object.keys(allPokemon).map((pokemon) => {
+                    return (
+                        <>
+                        <Card key={pokemon} apiLink={allPokemon.pokemon.url}>test</Card>
+                        <div>test</div>
+                        </>
+                    )
+                    
+                    
+                })
+            }
         <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card>
-        {allPokemon.map((pokemon) => (
+        {/* {allPokemon.map((pokemon) => (
             <h2 key={pokemon}>{pokemon}</h2>
-        ))}
+        ))} */}
         {/* <div>{loadPokemon()}</div> */}
         </>
     )

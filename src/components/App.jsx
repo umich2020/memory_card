@@ -107,6 +107,17 @@ console.log(allPokemon)
 // allPokemon.map((pokemon)=>{
    
 // })
+const loadPokemon = () => {
+    let list = []
+    for (const pokemons in allPokemon) {
+        list.push(
+            <Card key={allPokemon.pokemons.name} apiLink={allPokemon.pokemons.url}></Card>
+        )
+    }
+    console.log("what is list")
+    console.log(list)
+    return list
+}
     return (
         <>
         <h1>Pokemon Memory Game</h1>
@@ -114,19 +125,18 @@ console.log(allPokemon)
         <h2>Instructions:</h2>
         <p>Get points by clicking on an image. But don't click on a pokemon more than once!</p>
         </div>
-        <Card key={allPokemon.ditto} apiLink={allPokemon.ditto.url}></Card>
-        {/* <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card> */}
-        {console.log("everything is being ran first and then it's api issues")}
-        {/* {
-            for( const pokemon in allPokemon) {
-                console.log("help")
-                return (
-                    <Card key={pokemonName.name} apiLink={pokemonName.url}></Card>
-                    )
-            }
+        {/* {console.log("help me")
+                    for (const pokemon in allPokemon){
+                        return  (<> <Card key={allPokemon.pokemon} apiLink={allPokemon.pokemon.url}></Card> )
+                        </>}
         } */}
 
-        
+    
+        <Card key={allPokemon.ditto.name} apiLink={allPokemon.ditto.url}></Card>
+        {allPokemon.map((pokemon) => (
+            <h2 key={pokemon}>{pokemon}</h2>
+        ))}
+        {/* <div>{loadPokemon()}</div> */}
         </>
     )
 }

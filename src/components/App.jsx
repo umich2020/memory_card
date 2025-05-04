@@ -12,6 +12,8 @@ export function App() {
   ]);
   const [clicked, setClicked] = useState([]);
   const [reRender, setreRender] = useState(0);
+  const [currentScore, setcurrentScore] = useState(0)
+  const [highScore, sethighScore] = useState(0)
 
   useEffect(() => {
     // console.log("render is being used")
@@ -79,15 +81,22 @@ export function App() {
         }
     }
     
-    // console.log('pokimon is')
-    // console.log(pokemon)
+
     setClicked([...clicked, [pokemon]])//but is name property has already been assigned
-    // setClicked([...clicked, {[pokemon]:[pokemon]}])//but is name property has already been assigned
-    // console.log('set clicked is now')
-    // console.log(clicked)
+
     return false
   }
-
+  function increaseScore(){
+    setcurrentScore((currentScore)=>currentScore+1)
+    if(currentScore > highScore) {
+      const new_score = currentScore
+      sethighScore(new_score)
+    }
+  }
+  function resetScore(){
+    const score= 0
+    setcurrentScore(score)
+  }
   return (
     <>
       <h1>Pokemon Memory Game</h1>
@@ -98,6 +107,10 @@ export function App() {
           than once!
         </p>
       </div>
+      <div id='scores'>
+        <h2>Current score: {currentScore}</h2>
+        <h3>High score: {highScore}</h3>
+      </div>
       <div id="cards">
         {allPokemon.map((pokemon) => {
           return (
@@ -107,6 +120,8 @@ export function App() {
               name={pokemon.name}
               apiLink={pokemon.url}
               alreadyClick={alreadyClick}
+              increaseScore = {increaseScore}
+              resetScore = {resetScore}
             ></Card>
           );
         })}

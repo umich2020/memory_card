@@ -71,9 +71,10 @@ export function App() {
         }
     }
     console.log('what is set clicked')
-    console.log(setClicked)
-
-    setClicked(...click, {name:pokemon})
+    console.log(clicked)
+    console.log('pokimon is')
+    console.log(pokemon)
+    setClicked(...clicked, {name:pokemon})
     console.log('set clicked is now')
     console.log(setClicked)
     return false

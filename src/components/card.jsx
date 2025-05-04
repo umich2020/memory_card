@@ -1,12 +1,21 @@
 
-export function Card({apiLink,name,clickFunction}){
+export function Card({apiLink,name,randomize,alreadyClick}){
 
     let srcUrl = apiLink
 
-    function handleClick (e) {
+    function handleClick () {
+        //if already click === true {
+        //}
+
         console.log("this is")
-        console.log(e.target.key)
-        clickFunction()
+        console.log(name)
+        if(alreadyClick(name)) {
+            console.log("this has already been clicked")
+        } else {
+            console.log('this has yet to be clicked')
+        }
+        // console.log(e.currentTarget.key)
+        randomize()
     }
 
 

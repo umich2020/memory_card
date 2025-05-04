@@ -18,7 +18,6 @@ export function App() {
   useEffect(() => {
     // console.log("render is being used")
     let promises = [];
-    let obj = null;
 
     async function apiCalls() {
       for (const pokemon of allPokemon) {
@@ -66,8 +65,8 @@ export function App() {
     setreRender((current) => current + 1);
   }
   function alreadyClick(pokemon){
-    // console.log('what is set clicked')
-    // console.log(clicked)
+    console.log('what is set clicked')
+    console.log(clicked)
     for(let i=0; i<clicked.length; i++){
         // console.log("value to be evaulted")
         // console.log(clicked[i][0])
@@ -77,6 +76,7 @@ export function App() {
         console.log(clicked[i][0] === pokemon)
         if(clicked[i][0] === pokemon) {
             console.log('item is returning true and has been clicked')
+            setClicked([])
             return true
         }
     }
@@ -87,15 +87,30 @@ export function App() {
     return false
   }
   function increaseScore(){
-    setcurrentScore((currentScore)=>currentScore+1)
-    if(currentScore > highScore) {
-      const new_score = currentScore
-      sethighScore(new_score)
+    // if(currentScore === 0){
+    //   setcurrentScore(1)
+    // }
+    // console.log("i increased current score")
+    // console.log(currentScore)
+    const newScore =currentScore+1
+    setcurrentScore(newScore)
+    console.log("the current score isssssssss")
+    console.log(currentScore)
+    if(newScore > highScore) {
+      console.log("the current score is")
+      console.log(currentScore)
+      // const new_score = currentScore
+      sethighScore(()=>newScore)
+
+      // sethighScore(()=>new_score)
+      console.log('what is highscore')
+      console.log(highScore)
     }
   }
   function resetScore(){
     const score= 0
     setcurrentScore(score)
+    
   }
   return (
     <>

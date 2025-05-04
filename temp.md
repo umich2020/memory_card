@@ -33,3 +33,4 @@ on changing data. That's why i think it's not updating properly, maybe that's wh
 --access the for pokemon in AllPokemon means i'm accessing the property not the object in pokemon.
 -But it returns as a string not an object which is strange. i think that's why we might have to do promise all
 
+-current bug is the rendering is in the past and it's not updating

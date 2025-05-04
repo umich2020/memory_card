@@ -64,19 +64,27 @@ export function App() {
     setreRender((current) => current + 1);
   }
   function alreadyClick(pokemon){
+    // console.log('what is set clicked')
+    // console.log(clicked)
     for(let i=0; i<clicked.length; i++){
-        console.log(clicked[i].name)
-        if(clicked[i].name === pokemon) {
+        // console.log("value to be evaulted")
+        // console.log(clicked[i][0])
+        // console.log('pokemon')
+        // console.log(pokemon)
+        // console.log('tf statement')
+        console.log(clicked[i][0] === pokemon)
+        if(clicked[i][0] === pokemon) {
+            console.log('item is returning true and has been clicked')
             return true
         }
     }
-    console.log('what is set clicked')
-    console.log(clicked)
-    console.log('pokimon is')
-    console.log(pokemon)
-    setClicked(...clicked, {name:pokemon})
-    console.log('set clicked is now')
-    console.log(setClicked)
+    
+    // console.log('pokimon is')
+    // console.log(pokemon)
+    setClicked([...clicked, [pokemon]])//but is name property has already been assigned
+    // setClicked([...clicked, {[pokemon]:[pokemon]}])//but is name property has already been assigned
+    // console.log('set clicked is now')
+    // console.log(clicked)
     return false
   }
 

@@ -12,6 +12,7 @@ const [allPokemon, setAllPokemon] = useState({
 const [clicked, setClicked] = useState([])
 
 useEffect(()=>{
+    console.log("render is being used")
     let promises = []
     let obj = null
     async function apiCalls() {
@@ -47,8 +48,8 @@ console.log(allPokemon)
 // allPokemon.map((pokemon)=>{
    
 // })
-const loadPokemon = () => {
-    
+function randomize(){
+    setAllPokemon({...allPokemon, pikachu:{name:"pikachu"}})
 }
     return (
         <>
@@ -63,7 +64,7 @@ const loadPokemon = () => {
             {
                 Object.keys(allPokemon).map(pokemon => {
                    
-                    return <Card key={[pokemon]} name={pokemon} apiLink={allPokemon[pokemon].url}></Card>
+                    return <Card key={[pokemon]} clickFunction={randomize} name={pokemon} apiLink={allPokemon[pokemon].url}></Card>
                     
                 })
                 

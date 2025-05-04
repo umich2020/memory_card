@@ -1,11 +1,12 @@
 
-export function Card({apiLink,name}){
+export function Card({apiLink,name,clickFunction}){
 
     let srcUrl = apiLink
 
     function handleClick (e) {
         console.log("this is")
         console.log(e.target.key)
+        clickFunction()
     }
 
 

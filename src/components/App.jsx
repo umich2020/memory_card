@@ -3,20 +3,26 @@ import { Card } from "./card";
 import "./styles.css";
 
 export function App() {
-  console.log("start");
   const [allPokemon, setAllPokemon] = useState([
     { name: "ditto", url: "" },
     { name: "squirtle", url: "" },
     { name: "eevee", url: "" },
     { name: "charizard" },
+    {name:"hypno"},
+    {name:"magneton"},
+    {name:"golduck"},
+    {name:"bulbasaur"},
+    {name:"arcanine"},
+    {name:"vulpix"},
+    {name:"weezing"},
+    {name:"pikachu"},
   ]);
   const [clicked, setClicked] = useState([]);
   const [reRender, setreRender] = useState(0);
-  const [currentScore, setcurrentScore] = useState(0)
-  const [highScore, sethighScore] = useState(0)
+  const [currentScore, setcurrentScore] = useState(0);
+  const [highScore, sethighScore] = useState(0);
 
   useEffect(() => {
-    // console.log("render is being used")
     let promises = [];
 
     async function apiCalls() {
@@ -35,23 +41,13 @@ export function App() {
           });
       }
       Promise.all(promises).then(() => {
-        // console.log("the value of each promise is")
-        // console.log(promises)
         setAllPokemon(promises);
-        // console.log("after setting poki")
-        // console.log(allPokemon)
       });
-      // console.log("all pokemon is now")
-      // console.log(allPokemon)
     }
     apiCalls();
   }, [reRender]);
-  // getApiLink("ditto")
-  // console.log("pokemon list is")
-  // console.log(allPokemon)
 
   function randomize() {
-    // console.log('randomize working')
     let arr = allPokemon;
     for (let i = arr.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -64,67 +60,55 @@ export function App() {
     randomize(allPokemon);
     setreRender((current) => current + 1);
   }
-  function alreadyClick(pokemon){
-    console.log('what is set clicked')
-    console.log(clicked)
-    for(let i=0; i<clicked.length; i++){
-        // console.log("value to be evaulted")
-        // console.log(clicked[i][0])
-        // console.log('pokemon')
-        // console.log(pokemon)
-        // console.log('tf statement')
-        console.log(clicked[i][0] === pokemon)
-        if(clicked[i][0] === pokemon) {
-            console.log('item is returning true and has been clicked')
-            setClicked([])
-            return true
-        }
+  function alreadyClick(pokemon) {
+    for (let i = 0; i < clicked.length; i++) {
+      console.log(clicked[i][0] === pokemon);
+      if (clicked[i][0] === pokemon) {
+        setClicked([]);
+        return true;
+      }
     }
-    
 
-    setClicked([...clicked, [pokemon]])//but is name property has already been assigned
+    setClicked([...clicked, [pokemon]]);
 
-    return false
+    return false;
   }
-  function increaseScore(){
-    // if(currentScore === 0){
-    //   setcurrentScore(1)
-    // }
-    // console.log("i increased current score")
-    // console.log(currentScore)
-    const newScore =currentScore+1
-    setcurrentScore(newScore)
-    console.log("the current score isssssssss")
-    console.log(currentScore)
-    if(newScore > highScore) {
-      console.log("the current score is")
-      console.log(currentScore)
-      // const new_score = currentScore
-      sethighScore(()=>newScore)
-
-      // sethighScore(()=>new_score)
-      console.log('what is highscore')
-      console.log(highScore)
+  function increaseScore() {
+    const newScore = currentScore + 1;
+    setcurrentScore(newScore);
+    if (newScore === allPokemon.length) {
+      alert("you have won");
+    }
+    if (newScore > highScore) {
+      sethighScore(() => newScore);
     }
   }
-  function resetScore(){
-    const score= 0
-    setcurrentScore(score)
-    
+  function resetScore() {
+    const score = 0;
+    setcurrentScore(score);
   }
   return (
     <>
-      <h1>Pokemon Memory Game</h1>
-      <div id="instruction">
-        <h2>Instructions:</h2>
-        <p>
-          Get points by clicking on an image. But don't click on a pokemon more
-          than once!
-        </p>
-      </div>
-      <div id='scores'>
-        <h2>Current score: {currentScore}</h2>
-        <h3>High score: {highScore}</h3>
+      <div id="header">
+        <div id="left">
+          <div id="logo">
+            <img src="pokeball_png.png" id="logo_img" alt="pokeball logo"></img>
+          </div>
+          <intro>
+            <h1>Pokemon Memory Game</h1>
+            <div id="instruction">
+              <h2>Instructions:</h2>
+              <p>
+                Get points by clicking on an image. But don't click on a pokemon
+                more than once!
+              </p>
+            </div>
+          </intro>
+        </div>
+        <div id="scores">
+          <h2>Current score: {currentScore}</h2>
+          <h3>High score: {highScore}</h3>
+        </div>
       </div>
       <div id="cards">
         {allPokemon.map((pokemon) => {
@@ -135,8 +119,8 @@ export function App() {
               name={pokemon.name}
               apiLink={pokemon.url}
               alreadyClick={alreadyClick}
-              increaseScore = {increaseScore}
-              resetScore = {resetScore}
+              increaseScore={increaseScore}
+              resetScore={resetScore}
             ></Card>
           );
         })}

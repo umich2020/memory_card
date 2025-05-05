@@ -1,5 +1,5 @@
 
-export function Card({apiLink,name,randomize,alreadyClick,increaseScore,resetScore}){
+export function Card({apiLink,name,randomize,alreadyClick,increaseScore,resetScore,win}){
 
     let srcUrl = apiLink
 
@@ -7,13 +7,15 @@ export function Card({apiLink,name,randomize,alreadyClick,increaseScore,resetSco
         //if already click === true {
         //}
 
-        console.log("this is")
-        console.log(name)
-        if(alreadyClick(name)) {
-            console.log("this has already been clicked")
+        // console.log("this is")
+        // console.log(name)
+        const clicked = alreadyClick(name)
+        if(clicked) {
+            // console.log("this has already been clicked")
             resetScore()
-        } else {
-            console.log('this has yet to be clicked')
+        } 
+        else {
+            // console.log('this has yet to be clicked')
             increaseScore()
         }
         // console.log(e.currentTarget.key)

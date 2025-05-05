@@ -1,7 +1,10 @@
 
-export function Card({apiLink,name,randomize,alreadyClick,increaseScore,resetScore,win}){
+export function Card({apiLink,name,randomize,alreadyClick,increaseScore,resetScore}){
 
     let srcUrl = apiLink
+    if(srcUrl === ""){
+        srcUrl = null
+    }
 
     function handleClick () {
         //if already click === true {

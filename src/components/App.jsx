@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "./card";
-import "./styles.css";
+import "../styles/styles.css";
 
 export function App() {
   const [allPokemon, setAllPokemon] = useState([
@@ -94,7 +94,7 @@ export function App() {
           <div id="logo">
             <img src="pokeball_png.png" id="logo_img" alt="pokeball logo"></img>
           </div>
-          <intro>
+          <div id='intro'>
             <h1>Pokemon Memory Game</h1>
             <div id="instruction">
               <h2>Instructions:</h2>
@@ -103,7 +103,7 @@ export function App() {
                 more than once!
               </p>
             </div>
-          </intro>
+          </div>
         </div>
         <div id="scores">
           <h2>Current score: {currentScore}</h2>

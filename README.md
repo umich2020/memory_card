@@ -50,7 +50,6 @@ Clean up
 
 # Finishings Specs
 - css, src, and styles. Background image
-- I want to play with animations on this one, i.e. a correct! and an "incorrect" animation via css
 - Deploy
 
 ## Steps
